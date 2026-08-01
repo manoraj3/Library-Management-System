@@ -18,10 +18,17 @@ void search_book();
 struct book  *bhead = 0;
 struct issue *ihead = 0;
 
+/* global ID counters, kept in sync with data loaded from disk */
+int book_count  = 0;
+int issue_count = 0;
+
 char ch;
 
 int main()
 {
+	/* load previously saved books & issue records from disk, if any */
+	load_data();
+
 menu:
 	system("clear");
 
@@ -111,6 +118,7 @@ label:
 
 		case'E':
 		case'e':
+			save_data();
 			printf("\nGoodbye!\n\n");
 			return 0;
 
@@ -126,6 +134,7 @@ cases:
 		goto menu;
 	else if(ch == 'e')
 	{
+		save_data();
 		printf("\nGoodbye!\n\n");
 		return 0;
 	}

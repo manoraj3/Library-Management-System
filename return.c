@@ -66,6 +66,10 @@ void return_book()
 		bptr = bptr->next;
 	}
 
+	/* persist immediately: qty changed on the book, and the issue record changed */
+	save_books_data();
+	save_issues_data();
+
 	/* late fee */
 	int late = day_diff(iptr->due_date, iptr->return_date);
 	float fee = 0;

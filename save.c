@@ -6,33 +6,42 @@ void view_books();
 
 FILE *fp;
 static char sflag = 0, sf;
-
-void print_to_file(int id, char *title, char *author, int qty)
+void print_file(int id, char *title, char *author,int qty) 	
 {
-	int tlen = strlen(title);
-	int alen = strlen(author);
-
+	short int tlen = strlen(title);
+	short int alen = strlen(author);
+	short int c;
+	if(qty<=9)
+		c = 1;
+	else if(qty>=10 && qty<=99)
+		c = 2;
+	else if(qty>=100 && qty<=999)
+		c = 3;
+	else if (qty>=1000 && qty<=9999)
+		c = 4;
+	
+ 
 	fprintf(fp,"\t\t\t\t|%d",id);
-	for(int i=0;i<9;i++)
+	for(int i=0;i<10;i++)
 		fprintf(fp," ");
 	fprintf(fp,"|");
 
 	fprintf(fp,"%s",title);
-	for(int i=0;i<26-tlen;i++)
+	for(int i=0;i<22-tlen;i++)
 		fprintf(fp," ");
 	fprintf(fp,"|");
 
 	fprintf(fp,"%s",author);
-	for(int i=0;i<22-alen;i++)
+	for(int i=0;i<18-alen;i++)
 		fprintf(fp," ");
 	fprintf(fp,"|");
 
 	fprintf(fp,"%d",qty);
-	for(int i=0;i<4;i++)
+	for(int i=0;i<6-c;i++)
 		fprintf(fp," ");
-	fprintf(fp,"|\n");
+	fprintf(fp,"|");
 
-	fprintf(fp,"\t\t\t\t+");
+	fprintf(fp,"\n\t\t\t\t+");
 	for(int i=0;i<60;i++)
 		fprintf(fp,"-");
 	fprintf(fp,"+\n");
@@ -64,7 +73,7 @@ label:
 		while(ptr != 0)
 		{
 			sflag = 1;
-			print_to_file(ptr->id, ptr->title, ptr->author, ptr->qty);
+			print_file(ptr->id, ptr->title, ptr->author, ptr->qty);
 			ptr = ptr->next;
 		}
 

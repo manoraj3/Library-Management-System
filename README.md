@@ -177,10 +177,7 @@ gcc main.c bookops.c issueops.c -o lms
 
 ---
 
-## License
-
-Add your preferred license here (e.g. MIT, GPL-3.0).
 
 ## Author
 
-Add author/maintainer details here.
+MANORAJ G
